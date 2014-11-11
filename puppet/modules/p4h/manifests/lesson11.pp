@@ -38,8 +38,27 @@ Bonus:
 Happy hacking!\n",
 	}
 
-	# XXX: write your code here...
+	$message_1 = "Copyrighted Message 1"
+	$message_2 = "Copyrighted Message 2"
 
+	file { "/home/vagrant/message_1.txt":
+		ensure => file,
+		content => $message_1,
+		alias => $message_1,
+	}
+
+	file { "/home/vagrant/message_2.txt":
+		ensure => file,
+		content => $message_2,
+		alias => $message_2,
+	}
+
+	# This one isn't allowed since it's copyrighted material
+	file { "/home/vagrant/message_3.txt":
+		ensure => file,
+		content => $message_2,
+		alias => $message_2,
+	}
 }
 
 # vim: ts=8

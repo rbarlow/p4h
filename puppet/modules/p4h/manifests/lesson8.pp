@@ -44,8 +44,25 @@ Level 42:
 Happy hacking!\n",
 	}
 
-	# XXX: write your code here...
+	file { "/home/vagrant/managed/":
+		ensure => directory,
+		recurse => true,
+		purge => true,
+		force => true,
+		owner => root,
+		group => nobody,
+		mode => 644,
+		backup => false,
+	}
 
+	$some_stuff = {
+		'yo' => 'sup',
+	}
+
+	file { "/home/vagrant/managed/some_file.txt":
+		ensure => file,
+		content => inline_template("<%= @some_stuff['yo'] = 'hello'; @some_stuff.to_yaml() %>"),
+	}
 }
 
 # vim: ts=8

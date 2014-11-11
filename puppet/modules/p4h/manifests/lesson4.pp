@@ -17,7 +17,7 @@
 
 # README: this is a module built for use with: Oh My Vagrant!
 
-class p4h::lesson4() {
+class p4h::lesson4( $users = ['brian', 'randy', 'barnaby'] ) {
 
 	file { '/root/README':
 		content => "##lesson4
@@ -40,7 +40,10 @@ Level 42:
 Happy hacking!\n",
 	}
 
-	# XXX: write your code here...
+	$modified_users = join($users, "Hello: ")
+
+	notify { $modified_users:}
+
 
 }
 

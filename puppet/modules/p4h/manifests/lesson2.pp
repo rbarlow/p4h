@@ -37,8 +37,22 @@ Bonus:
 Happy hacking!\n",
 	}
 
-	# XXX: write your code here...
+	file { "/home/vagrant/some_file.txt":
+		ensure => file,
+		content => inline_template("Holy craaaaaap!
+My hostname is <=% hostname %>.
+		"),
+	}
 
+	$machine_number = regsubst($hostname, '([a-z]+)(\d)+', '\2')
+	$message = "The lesson number is $machine_number."
+	notice($message)
+	$checksum = sha1($message)
+	notice("Just in case you were wondering, the sha1 of that last message is $checksum.")
+
+	$octets = split("192.168.25.1", ".")
+	$second_octet = $octets[1]
+	notice("192.168.25.1's second octet is $second_octet.")
 }
 
 # vim: ts=8

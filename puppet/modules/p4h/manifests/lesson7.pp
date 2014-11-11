@@ -17,7 +17,7 @@
 
 # README: this is a module built for use with: Oh My Vagrant!
 
-class p4h::lesson7() {
+class p4h::lesson7( $who ) {
 
 	file { '/root/README':
 		content => "##lesson7
@@ -38,7 +38,7 @@ Level 42:
 Happy hacking!\n",
 	}
 
-	# XXX: write your code here...
+	notify { "Hello, $who":}
 
 }
 

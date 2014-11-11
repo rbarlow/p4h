@@ -37,8 +37,35 @@ Level 42:
 Happy hacking!\n",
 	}
 
-	# XXX: write your code here...
+	cron { 'echo "2 o\'clock and all is well." | mail -s rbarlow@redhat.com':
+		user    => root,
+		hour    => 2,
+		minute  => 0
+	}
 
+	file { "/home/vagrant/some_folder":
+		ensure => directory,
+	}
+
+	file { "/home/vagrant/some_folder/some_file.txt":
+		ensure => file,
+		content => "some text\n",
+		require => File["/home/vagrant/some_folder"],
+	}
+
+	host { "where":
+		ip => "10.192.215.84",
+	}
+
+	file { "/mnt/vagrant":
+		ensure => directory,
+	}
+
+	mount { "/mnt/vagrant":
+		fstype => "bind",
+		device => "/home/vagrant",
+		require => File["/mnt/vagrant"],
+	}
 }
 
 # vim: ts=8

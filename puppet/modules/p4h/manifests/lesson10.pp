@@ -32,7 +32,21 @@ Bonus:
 Happy hacking!\n",
 	}
 
-	# XXX: write your code here...
+	concat { '/home/vagrant/example.txt':
+		ensure => present,
+	}
+
+	concat::fragment { 'example1':
+		target  => '/home/vagrant/example.txt',
+		content => "First content\n",
+		order   => '01'
+	}
+
+	concat::fragment { 'example2':
+		target  => '/home/vagrant/example.txt',
+		content => "Second content\n",
+		order   => '02'
+	}
 
 }
 

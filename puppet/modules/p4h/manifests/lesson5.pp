@@ -44,7 +44,7 @@ Bonus:
 Happy hacking!\n",
 	}
 
-	# XXX: write your code here...
+	notify { $root_stuff:}
 
 }
 
