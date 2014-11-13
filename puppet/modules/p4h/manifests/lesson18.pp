@@ -41,7 +41,12 @@ Level 42:
 Happy hacking!\n",
 	}
 
-	# XXX: write your code here...
+	include common::again
+
+	exec { "/usr/bin/date >> /home/vagrant/time.txt":
+		notify => Exec['again'], # notify puppet!
+		unless => '/usr/bin/test $(/usr/bin/wc -l /home/vagrant/time.txt | /usr/bin/cut -f1 -d" ") -eq 60',
+	}
 
 }
 

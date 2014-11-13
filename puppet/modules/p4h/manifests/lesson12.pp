@@ -23,6 +23,10 @@ class p4h::lesson12() {
 		content => "##lesson12
 For this lesson, please do the following:
 * Name two uses (specific pieces of software) for a 'fact exchange'
+	- Deploy Apache to one host, and have it export its ports and IP address to your firewall so
+	  that it allows traffic to the host.
+	- Deploy a new MongoDB replica and have it export its existence to the replica set so that
+	  they add it.
 * Implement a simple fact exchange
 ** The code must be the same for all hosts that use it
 ** It should work for N different hosts

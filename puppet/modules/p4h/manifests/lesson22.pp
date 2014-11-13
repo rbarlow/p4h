@@ -31,7 +31,11 @@ Bonus:
 Happy hacking!\n",
 	}
 
-	# XXX: write your code here...
+	gluster::mount { '/mnt/gluster/puppet/':
+		server => 'lesson21a.example.com:/puppet',
+		rw => true,
+		shorewall => false,
+	}
 
 }
 

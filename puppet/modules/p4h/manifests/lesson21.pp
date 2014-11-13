@@ -48,7 +48,11 @@ Level 42:
 Happy hacking!\n",
 	}
 
-	# XXX: write your code here...
+	gluster::mount { '/mnt/gluster/puppet/':
+		server => 'lesson21b.example.com:/puppet',
+		rw => true,
+		shorewall => false,
+	}
 
 }
 

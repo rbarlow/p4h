@@ -17,28 +17,39 @@
 
 # README: this is a module built for use with: Oh My Vagrant!
 
-class p4h::lesson20() {
+class p4h::lesson23() {
 
 	file { '/root/README':
-		content => "##lesson20
+		content => "##lesson22
 For this lesson, please do the following:
-* Collect duplicate resources in puppet
-** This means you'll need three machines
-** Of course you'll also need to be comfortable with exported resources
-* Don't misuse this technique
-** It's typically useful to provide 'highly available' exported types
-*** It happens when you have dual primary clusters that export to a third party
-**** It can also happen with N-ary clusters too :)
+* Fact exchange between two machines
 
 Bonus:
-* Check that your example still works when you have three identical exports
-* Make sure you wrap the exported defintions in 'plain' types where appropriate
+* Add a third machine and see it also participate
 
 Happy hacking!\n",
 	}
 
-	class { '::gluster::simple':
-		shorewall => false,
+	include common::again
+
+	$some_path = "/home/vagrant/facts/${::hostname}-exec_time.txt"
+
+	exec { "/usr/bin/date > ${some_path}":
+		unless => "/usr/bin/ls ${some_path}",
+		require => File["/home/vagrant/facts/"],
+	}
+
+	file { "/home/vagrant/facts/":
+		ensure => directory,
+	}
+
+	@@file { "/home/vagrant/${::hostname}-exported_time.txt":
+		content => "$::approximate_start_date",
+		ensure => present,
+		tag => "$::hostname",
+	}
+
+	File <<| tag != "$::hostname" |>> {
 	}
 
 }

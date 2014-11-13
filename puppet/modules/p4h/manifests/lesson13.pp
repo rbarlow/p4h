@@ -46,7 +46,15 @@ Level 42:
 Happy hacking!\n",
 	}
 
-	# XXX: write your code here...
+	@@file { "/home/vagrant/$::hostname.txt":
+		content => "$::hostname\n",
+		ensure => present,
+		tag => "$::hostname",
+	}
+
+	File <<| tag != "$::hostname" |>> {
+		path => '/home/vagrant/other_hostname.txt',
+	}
 
 }
 
